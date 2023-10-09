@@ -11,13 +11,17 @@ import { useEffect } from 'react';
 
 export default function Home(): JSX.Element {
   const getImages = async ({ pageParam = null }) => {
-    const { data } = await api.get(`/api/images`, {
-      params: {
-        after: pageParam,
-      },
-    });
-    console.log('🚀 ~ file: index.tsx:16 ~ getImages ~ data:', data);
-    return data;
+    try {
+      const { data } = await api.get(`/api/images`, {
+        params: {
+          after: pageParam,
+        },
+      });
+      console.log('🚀 ~ file: index.tsx:16 ~ getImages ~ data:', data);
+      return data;
+    } catch (e) {
+      console.error(`error getImages: ${e}`);
+    }
   };
 
   const {
